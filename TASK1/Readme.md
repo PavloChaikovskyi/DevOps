@@ -1,5 +1,10 @@
 TASK1
 
 - create Ubuntu server on aws with terraform +++
-  - the problem here that I cant connect to my server with ssh connection : need to understand how to do it 
+- connect with SSH +++
+- 1.1 root cannot connect by password : edit /etc/ssh/sshd_config file on server PermitRootLogin prohibit-password
+  - there is 2 option : 
+    - manually on the server file +++
+    - by terraform script during execution - currently in progress
+
 
