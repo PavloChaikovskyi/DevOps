@@ -1,6 +1,8 @@
 # aws user credentials: should be hidden
 
-provider "aws" {}
+provider "aws" {
+
+}
 
 # aws instance setting
 
@@ -13,7 +15,11 @@ resource "aws_instance" "my_Ubuntu" {
   
   # Provisioner to execute remote script after instance will be installed
   provisioner "remote-exec" {
-    inline = [file("scripts/root_permision.sh")]
+    inline = [
+      file("scripts/root_login.sh"),
+      file("scripts/users_login.sh"),
+      file("scripts/user_motd_mesg.sh")
+      ]
     
     connection {
       type        = "ssh"
