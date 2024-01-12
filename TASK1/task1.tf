@@ -13,14 +13,10 @@ resource "aws_instance" "my_Ubuntu" {
   key_name = aws_key_pair.ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
   
-  # Provisioner to execute remote script after instance will be installed
-  provisioner "remote-exec" {
-    inline = [
-      file("scripts/root_login.sh"),
-      file("scripts/users_login.sh"),
-      file("scripts/user_motd_mesg.sh")
-      ]
-    
+  provisioner "file" {
+    source      = "scripts/01-custom"
+    destination = "/tmp/01-custom"
+
     connection {
       type        = "ssh"
       user        = "ubuntu"
@@ -28,6 +24,38 @@ resource "aws_instance" "my_Ubuntu" {
       host        = self.public_ip
     }
   }
+
+  provisioner "remote-exec" {
+    inline = ["sudo mv /tmp/01-custom /etc/update-motd.d/01-custom"]
+  }
+
+
+  # Provisioner to execute remote script after instance will be installed
+  provisioner "remote-exec" {
+    inline = [
+      "sudo apt update -y",
+      file("scripts/root_login.sh"),
+      file("scripts/users_login.sh"),
+      file("scripts/user_motd_mesg.sh"),
+      "sudo chmod -x /etc/update-motd.d/*",
+      "sudo chmod -x /usr/share/landscape/landscape-sysinfo.wrapper",
+      "sudo chmod +x /etc/update-motd.d/01-custom",
+    ]
+  }
+
+  provisioner "remote-exec" {
+  inline = [
+    "sudo apt install -y inxi screenfetch ansiweather",
+    "sudo systemctl restart ssh",
+  ]
+
+}
+      connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file("~/.ssh/id_rsa")
+      host        = self.public_ip
+    }
 }
 
 # init ssh_key
