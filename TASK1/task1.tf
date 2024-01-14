@@ -7,22 +7,16 @@ provider "aws" {
 # aws instance setting
 
 resource "aws_instance" "my_Ubuntu" {
-  ami = "ami-0faab6bdbac9486fb"
-  instance_type = "t2.micro"
-  tags = { Name = "Ubuntu" }
-  key_name = aws_key_pair.ssh_key.key_name
+  ami                    = "ami-0faab6bdbac9486fb"
+  instance_type          = "t2.micro"
+  tags = { Name          = "Ubuntu" }
+  key_name               = aws_key_pair.ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
   
+  # Provisioner to execute remote script after instance will be installed
   provisioner "file" {
-    source      = "scripts/01-custom"
-    destination = "/tmp/01-custom"
-
-    connection {
-      type        = "ssh"
-      user        = "ubuntu"
-      private_key = file("~/.ssh/id_rsa")
-      host        = self.public_ip
-    }
+    source               = "scripts/01-custom"
+    destination          = "/tmp/01-custom"
   }
 
   provisioner "remote-exec" {
@@ -30,9 +24,9 @@ resource "aws_instance" "my_Ubuntu" {
   }
 
 
-  # Provisioner to execute remote script after instance will be installed
   provisioner "remote-exec" {
     inline = [
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done", #very important: help to avoid conflict before apt udates 
       "sudo apt update -y",
       file("scripts/root_login.sh"),
       file("scripts/users_login.sh"),
@@ -44,18 +38,18 @@ resource "aws_instance" "my_Ubuntu" {
   }
 
   provisioner "remote-exec" {
-  inline = [
-    "sudo apt install -y inxi screenfetch ansiweather",
-    "sudo systemctl restart ssh",
-  ]
+    inline = [
+      "sudo apt install -y inxi screenfetch ansiweather",
+      "sudo systemctl restart ssh",
+    ]
+  }
 
-}
-      connection {
+  connection {
       type        = "ssh"
       user        = "ubuntu"
       private_key = file("~/.ssh/id_rsa")
       host        = self.public_ip
-    }
+  }
 }
 
 # init ssh_key
