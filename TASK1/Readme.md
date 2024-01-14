@@ -8,3 +8,10 @@ TASK1
     - by terraform script during execution - currently in progress
 
 
+[fix problem with update apt](https://stackoverflow.com/questions/42279763/why-does-terraform-apt-get-fail-intermittently)
+
+> until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
+>  sleep 1
+> done
+
+
