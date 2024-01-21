@@ -17,7 +17,7 @@
 
 #### WHAT WAS DONE
 1. install docker engine to ec2 Ubuntu instance by : [docker docks manual](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
-![Check the Docker Version](/images/docker-version.png)
+![Check the Docker Version](images/docker-version.png)
 ##### FIXED PROBLEMS
 
 ##### USEFULL MATERIALS
