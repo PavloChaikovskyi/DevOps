@@ -12,8 +12,3 @@ sudo docker build -t portfolio-image ~/portfolio-website/
 
 #run my website docker container
 sudo docker run -d -p 80:80 --name portfolio-container portfolio-image
-
-
-
-
-

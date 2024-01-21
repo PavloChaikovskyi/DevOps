@@ -45,7 +45,7 @@ resource "aws_instance" "my_Ubuntu" {
   provisioner "remote-exec" {
     inline = [
       file("scripts/docker_install.sh"),
-      file("scripts/deploy-website.sh")
+      file("scripts/deploy_website.sh")
     ]
   }
   connection {
