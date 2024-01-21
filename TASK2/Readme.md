@@ -1,7 +1,7 @@
 ### TASK2 Description
 
 ###### Part1 
-1. Install Docker in EC2 Ubuntu instance by terraform 
+1. Install Docker in EC2 Ubuntu instance by terraform +++
 2. In docker container add web-site
 
 ###### Part2 
@@ -16,7 +16,8 @@
 
 
 #### WHAT WAS DONE
-
+1. install docker engine to ec2 Ubuntu instance by : [docker docks manual](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+![Check the Docker Version](/images/docker-version.png)
 ##### FIXED PROBLEMS
 
 ##### USEFULL MATERIALS

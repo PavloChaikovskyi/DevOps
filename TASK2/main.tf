@@ -36,6 +36,12 @@ resource "aws_instance" "my_Ubuntu" {
       "sudo systemctl restart ssh",
     ]
   }
+  # install docker engine to instance
+    provisioner "remote-exec" {
+    inline = [
+      file("scripts/docker_install.sh"),
+    ]
+  }
   connection {
     type        = "ssh"
     user        = "ubuntu"
