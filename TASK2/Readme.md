@@ -18,8 +18,22 @@
 #### WHAT WAS DONE
 1. install docker engine to ec2 Ubuntu instance by : [docker docks manual](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 ![Check the Docker Version](images/docker-version.png)
+2. Clone repository from GitHub with website
+3. Add to this website Dockerfile and create docker image
+4. Run docker container on nginx server 
+
+
+
+
 ##### FIXED PROBLEMS
 
 ##### USEFULL MATERIALS
+> git commit -m --allow-empty : allow commits without message
+
+> #build my website docker image
+> sudo docker build -t portfolio-image ~/portfolio-website/
+
+> #run my website docker container
+> sudo docker run -d -p 80:80 --name portfolio-container portfolio-image
 
 

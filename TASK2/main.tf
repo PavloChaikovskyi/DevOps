@@ -16,6 +16,11 @@ resource "aws_instance" "my_Ubuntu" {
     source      = "scripts/01-custom"
     destination = "/tmp/01-custom"
   }
+  #copy Dockerfile to instance
+  provisioner "file" {
+    source      = "scripts/Dockerfile"
+    destination = "/home/ubuntu/Dockerfile"
+  }
   provisioner "remote-exec" {
     inline = ["sudo mv /tmp/01-custom /etc/update-motd.d/01-custom"]
   }
@@ -37,9 +42,10 @@ resource "aws_instance" "my_Ubuntu" {
     ]
   }
   # install docker engine to instance
-    provisioner "remote-exec" {
+  provisioner "remote-exec" {
     inline = [
       file("scripts/docker_install.sh"),
+      file("scripts/deploy-website.sh")
     ]
   }
   connection {
@@ -70,6 +76,13 @@ resource "aws_security_group" "allow_ssh_and_http_https" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Allow SSH traffic from any source
+  }
+  # add 80 port for webhost connection 
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow HTTP traffic from any source
   }
   egress {
     from_port   = 0
