@@ -21,6 +21,7 @@
 2. Clone repository from GitHub with website
 3. Add to this website Dockerfile and create docker image
 4. Run docker container on nginx server 
+-  Add sensitive credentials to variables
 5. Install AWS CLI and add credentials
 6. Create s3 bucket
 7. Create backup script that include 
@@ -52,6 +53,9 @@ create s3 bucket
 Create a backup of the Docker container
 > docker export -o "backup-$(date +\%Y\%m\%d-\%H\%M\%S).tar.gz" "portfolio-container" | gzip -f
 
+add the right permissions to the file
+> chmod +r /home/ubuntu/$BACKUP_FILE
+
 Upload the backup file to S3 bucket
 > sudo aws s3 cp "backup-20240121-213510.tar.gz" "s3://backup-pavlo-test-website/backup-20240121-213510.tar.gz"
 
@@ -59,7 +63,7 @@ Remove the local backup file
 > rm "backup-20240121-213510.tar.gz"
 
 Make the script executable:
-> chmod +x backup_script.sh
+> sudo chmod +x backup_script.sh
 
 Run the script manually to ensure it's working correctly:
 > ./backup_script.sh
@@ -68,5 +72,7 @@ Open your crontab configuration:
 > crontab -e
 
 Add a line to schedule the script daily at 8:00 AM:
-> 0 8 * * * /path/to/backup_script.sh
+> echo '45 23 * * * /home/ubuntu/backup_script.sh' | crontab
 
+Remove bucket 
+> aws s3 rb s3://backup-pavlo-test-website --force 
