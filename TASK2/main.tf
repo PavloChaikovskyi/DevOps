@@ -6,6 +6,17 @@ provider "aws" {
 }
 
 ###################################################################################################
+### S3 BUCKETS 
+###################################################################################################
+resource "aws_s3_bucket" "backup_s3" {
+  bucket = "backup-pavlo-test-website"
+  tags = {
+    Name        = "My bucket backup"
+    Environment = "Dev"
+  }
+}
+
+###################################################################################################
 ### EC2 INSTANCES
 ###################################################################################################
 # aws instance setting
@@ -34,7 +45,7 @@ resource "aws_instance" "my_Ubuntu" {
       # "sudo mv /tmp/01-custom /etc/update-motd.d/01-custom",
       "sudo chmod +x /home/ubuntu/backup_script.sh",
       # execute script every day at 23:40 
-      "echo '45 23 * * * /home/ubuntu/backup_script.sh' | crontab"
+      "echo '45 10 * * * /home/ubuntu/backup_script.sh' | crontab"
       ]
   }
   provisioner "remote-exec" {
@@ -65,7 +76,7 @@ resource "aws_instance" "my_Ubuntu" {
       file("scripts/docker_install.sh"),
       file("scripts/deploy_website.sh"),
       # create s3 bucket
-      "aws s3api create-bucket --bucket backup-pavlo-test-website --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1",
+      # "aws s3api create-bucket --bucket  --region eu-central-1 --create-bucket-configuration LocationConstraint=eu-central-1",
       # run backup script
     ]
   }
