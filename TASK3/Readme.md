@@ -36,3 +36,5 @@ Cool our VPC ready to use
 
 ##### USEFULL MATERIALS
 
+- [terraform aws vpc](https://spacelift.io/blog/terraform-aws-vpc)
+
