@@ -10,5 +10,10 @@
 
 
 #### WHAT WAS DONE
+  - Private VPC : 3 AZ / 3 Public Subnets / 3 Instances in each / 
+
+
 ##### USEFULL MATERIALS
 
+get list of ec2 instances public ip 
+> aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, PublicIpAddress]' --output table
