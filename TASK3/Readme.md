@@ -33,6 +33,7 @@ Cool our VPC ready to use
 
 ###### 2. By terraform file
 
+ ![vpc-result.png](images/vpc-result.png) 
 
 ##### USEFULL MATERIALS
 
