@@ -1,13 +1,8 @@
 ### TASK3 Description
 
 ###### THEORY
-1. Udemy: сети с нуля просто о сложном +++ 
-2. AWS VPC : youtube idv-it +++
-
-1. Theory Virtualization : watch matherials 06
-2. [Ansible Theory!!!](https://www.youtube.com/playlist?list=PLg5SS_4L6LYufspdPupdynbMQTBnZd31N) + 07 Materials 
-3. Vagrant, Chief, Puppet - ознайомитись (get acquainted)
-4. Jenkins Watch 
+1. [Udemy: NETworks from scratch RU](https://www.udemy.com/course/net_from_zero/) +++ 
+2. [youtube : AWS VPC : idv-it](https://www.youtube.com/watch?v=zPjVWiPpT-8&list=PLg5SS_4L6LYsxrZ_4xE_U95AtGsIB96k9&index=27) +++
 
 ###### PRACTICE
 1. Manually Inside AWS CLOUD PANNEL +++ 
@@ -23,7 +18,7 @@
 3. Create 3 public subnets in 3 different avaliability zones : ( add public api because default they privat)
 4. Add public gateway to routing table 
 5. create 2 private subnets (no public ip)
-6. add NAT Gateway with Elastic API and add it to private route tables Routes
+6. add NAT Gateway with Elastic API and add it to private route tables Routes /
 ======
 Cool our VPC ready to use 
 ======
