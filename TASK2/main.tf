@@ -10,6 +10,7 @@ provider "aws" {
 ###################################################################################################
 resource "aws_s3_bucket" "backup_s3" {
   bucket = "backup-pavlo-test-website"
+  force_destroy = true
   tags = {
     Name        = "My bucket backup"
     Environment = "Dev"
