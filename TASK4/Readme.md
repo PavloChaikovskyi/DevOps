@@ -24,18 +24,52 @@ Part1:
   ![pin-pong.png](images/pin-pong.png) 
 
 Part2: 
-- run two ec2 instances : ( 1st for Ansible : with configuration, 2nd for Web Server) in my VPC on aws cloud
-- 
+- run ec2 instance "webserver" :
+- run ec2 instance "ansible" : 
+  - install aws cli
+  - copy private ssh key for web server 
+  - get public api from webserver by aws cli 
+  - install ansible
+  - download ansible scripts from github by terraform
 
+- ansible scripts : 
+  - connect to webserver with ssh
+  - get website from git 
+  - get dockerfile from git
+  - install docker
+  - create docker image
+  - run docker container
+
+
+
+- hosts.txt має генеруватись на льоту в залежності від даних які нам потрібні для того щоб залогінитись на веб сервер
+- впершу чергу пропишу команди локально щоб запустити веб сервер а потім те саме проверну вже з інстанса ансібла
+
+який файл відповідає за скрипти на законекченному ансіблом інстансі?
+прописати потрібні скрипти
 
 ##### USEFULL MATERIALS
 
 aws cli : get list of ec2 instances public ip  
 > aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId, PublicIpAddress]' --output table
 
+get answer pong from connected servers
 > ansible -i hosts.txt all -m ping  
-> ansible all -m ping  
+
+> ansible all -m ping
+
+see the tree of ansible hierarchy 
 > ansible-inventory --list  
 
 generate local key_pair
 > ssh-keygen -t rsa -b 2048 -f ~/.ssh/my_key_pair
+
+get public ip with aws instance by tag 
+> aws ec2 describe-instances \
+>  --filters "Name=tag:Name,Values=Web Server" \
+>  --query "Reservations[].Instances[].[PublicIpAddress]" \
+>  --output text
+
+[Download Docker with Ansible playbook](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04)
+
+
