@@ -7,7 +7,6 @@ provider "aws" {
   region     = var.aws_region
 }
 
-
 ###################################################################################################
 ### VPC
 ###################################################################################################
@@ -80,11 +79,22 @@ resource "aws_instance" "ansible" {
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
   subnet_id              = aws_subnet.public_subnets[0].id  # Specify the subnet for each instance
 
+  provisioner "file" {
+    source      = "~/.ssh/id_rsa"
+    destination = "/home/ubuntu/id_rsa"
+  }
+
   provisioner "remote-exec" {
     inline = [
-      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 10; done",
+      "sudo mv /home/ubuntu/id_rsa ~/.ssh/id_rsa", #move ssh_key for webserver to .ssh folder
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 10; done", #be sure installing finished 
       "sudo apt update -y",
-      "sudo apt install ansible -y"
+      # "sudo apt install -y ansible", 
+      "sudo apt-get install awscli -y", #aws cli & configure
+      "aws configure set aws_access_key_id ${var.aws_access_key}",
+      "aws configure set aws_secret_access_key ${var.aws_secret_key}",
+      "aws configure set default.region ${var.aws_region}",
+      file("scripts/get_ec2_ip_by_aws_cli.sh") #save webserver public ip to .txt file on /home/ubuntu/.txt
     ]
   }
 
@@ -99,7 +109,7 @@ resource "aws_instance" "ansible" {
 resource "aws_instance" "web_server" {
   ami                    = "ami-0faab6bdbac9486fb"
   instance_type          = "t2.micro"
-  tags                   = { Name = "Web Server" } 
+  tags                   = { Name = "Webserver" }  
   key_name               = aws_key_pair.ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
   subnet_id              = aws_subnet.public_subnets[1].id  # Specify the subnet for each instance
