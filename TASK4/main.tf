@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_vpc" "main" {
  cidr_block = "10.0.0.0/16" 
  tags = {
-   Name = "Pavlo VPC"
+   Name = "Ansible VPC"
  }
 }
 
@@ -25,7 +25,7 @@ resource "aws_internet_gateway" "gw" {
  vpc_id = aws_vpc.main.id
  
  tags = {
-   Name = "Pavlo GW"
+   Name = "Ansible GW"
  }
 }
 
@@ -72,14 +72,37 @@ resource "aws_subnet" "public_subnets" {
 ###################################################################################################
 ### EC2 INSTANCES
 ###################################################################################################
-resource "aws_instance" "my_Ubuntu" {
-  count = length(var.public_subnet_cidrs)
+resource "aws_instance" "ansible" {
   ami                    = "ami-0faab6bdbac9486fb"
   instance_type          = "t2.micro"
-  tags                   = { Name = "Ubuntu-${count.index + 1}" } 
+  tags                   = { Name = "Ansible" } 
+  key_name               = aws_key_pair.ansible_ssh_key.key_name
+  vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
+  subnet_id              = aws_subnet.public_subnets[0].id  # Specify the subnet for each instance
+
+  provisioner "remote-exec" {
+    inline = [
+      "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 10; done",
+      "sudo apt update -y",
+      "sudo apt install ansible -y"
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file("~/.ssh/ansible_key")
+    host        = self.public_ip
+  }
+}
+
+resource "aws_instance" "web_server" {
+  ami                    = "ami-0faab6bdbac9486fb"
+  instance_type          = "t2.micro"
+  tags                   = { Name = "Web Server" } 
   key_name               = aws_key_pair.ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
-  subnet_id              = aws_subnet.public_subnets[count.index].id  # Specify the subnet for each instance
+  subnet_id              = aws_subnet.public_subnets[1].id  # Specify the subnet for each instance
 }
 
 ###################################################################################################
@@ -88,6 +111,11 @@ resource "aws_instance" "my_Ubuntu" {
 resource "aws_key_pair" "ssh_key" {
   key_name   = "ssh_key"
   public_key = file("~/.ssh/id_rsa.pub")
+}
+
+resource "aws_key_pair" "ansible_ssh_key" {
+  key_name   = "ansible_ssh_key"
+  public_key = file("~/.ssh/ansible_key.pub")
 }
 
 ###################################################################################################

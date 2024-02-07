@@ -7,8 +7,8 @@
 
 ###### PRACTICE
 1. Using Ansible create WebServer from task 2 
-  - create ec2 by terraform for ansible installing all dependencies
-  - create ec2 by terraform for webserver 
+  - create ec2 by terraform for ansible
+  - create ec2 by terraform for webserver
   - locally create ansible script for deploying website to ec2 webserver
   - push it to separate github repository with ansible configs
   - pull ansible configs to ec2 ansible and run scripts to create WebServer from task 2
@@ -25,6 +25,7 @@ Part1:
 
 Part2: 
 - run two ec2 instances : ( 1st for Ansible : with configuration, 2nd for Web Server) in my VPC on aws cloud
+- 
 
 
 ##### USEFULL MATERIALS
@@ -35,3 +36,6 @@ aws cli : get list of ec2 instances public ip
 > ansible -i hosts.txt all -m ping  
 > ansible all -m ping  
 > ansible-inventory --list  
+
+generate local key_pair
+> ssh-keygen -t rsa -b 2048 -f ~/.ssh/my_key_pair
