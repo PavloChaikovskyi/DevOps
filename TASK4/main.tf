@@ -89,7 +89,7 @@ resource "aws_instance" "ansible" {
       "sudo mv /home/ubuntu/id_rsa ~/.ssh/id_rsa", #move ssh_key for webserver to .ssh folder
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 10; done", #be sure installing finished 
       "sudo apt update -y",
-      # "sudo apt install -y ansible", 
+      "sudo apt install -y ansible", 
       "sudo apt-get install awscli -y", #aws cli & configure
       "aws configure set aws_access_key_id ${var.aws_access_key}",
       "aws configure set aws_secret_access_key ${var.aws_secret_key}",
@@ -124,7 +124,7 @@ resource "aws_key_pair" "ssh_key" {
 }
 
 resource "aws_key_pair" "ansible_ssh_key" {
-  key_name   = "ansible_ssh_key"
+  key_name   = "ansible_key"
   public_key = file("~/.ssh/ansible_key.pub")
 }
 

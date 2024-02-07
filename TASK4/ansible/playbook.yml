@@ -1,0 +1,138 @@
+---
+ - name: Download Website and Dockerfile
+   hosts: webserver
+   become: yes
+   tasks: 
+    - name: Create directory for the Git repository
+      ansible.builtin.file:
+        path: /home/ubuntu/gitrepo
+        state: directory
+        mode: '0755'
+    
+    - name: Create directory for the Git repository
+      ansible.builtin.file:
+        path: /home/ubuntu/website
+        state: directory
+        mode: '0755'
+
+    - name: Clone the Git repository to gitrepo folder
+      ansible.builtin.git:
+        repo: https://github.com/PavloChaikovskyi/Portfolio_PC.git
+        dest: /home/ubuntu/gitrepo
+
+    - name: Copy Portfolio Web Page to my website folder
+      ansible.builtin.copy:
+        src: /home/ubuntu/gitrepo/Portfolio-Web-Page/
+        dest: /home/ubuntu/website/
+        remote_src: yes
+    
+    - name: Remove gitrepo folder
+      ansible.builtin.file:
+        path: /home/ubuntu/gitrepo
+        state: absent
+
+    - name: Create directory for Dockerfile
+      ansible.builtin.file:
+        path: /home/ubuntu/dockerfile
+        state: directory
+        mode: '0755'
+
+    - name: Download Dockerfile
+      ansible.builtin.git:
+        repo: https://github.com/PavloChaikovskyi/Docker.git
+        dest: /home/ubuntu/dockerfile
+
+    - name: Copy Dockerfile to my website
+      ansible.builtin.copy:
+        src: /home/ubuntu/dockerfile/Dockerfile
+        dest: /home/ubuntu/website/
+        remote_src: yes
+
+# install docker start 
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: yes
+    
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: yes
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: yes
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+
+# install docker start end 
+
+    - name: Build Docker image
+      ansible.builtin.docker_image:
+        name: website_image 
+        build:
+          path: /home/ubuntu/website/
+        source: build
+
+    - name: Run Docker container
+      ansible.builtin.docker_container:
+        name: website_container 
+        image: website_image   
+        ports:
+          - "80:80" 
+
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
