@@ -100,7 +100,7 @@ resource "aws_instance" "ansible" {
       file("scripts/update_hosts.sh"),
       "sleep 10",
       "echo 'lets go! to play ansible'",
-      "ansible-playbook -i ~/Ansible/ansible.cfg playbook.yml"
+      "ansible-playbook -i ~/Ansible/ansible.cfg ~/Ansible/playbook.yml"
     ]
   }
 
