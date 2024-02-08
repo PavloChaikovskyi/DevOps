@@ -96,6 +96,8 @@ resource "aws_instance" "ansible" {
       "aws configure set default.region ${var.aws_region}",
       file("scripts/get_ec2_ip_by_aws_cli.sh"), #save webserver public ip to .txt file on /home/ubuntu/.txt
       "git clone https://github.com/PavloChaikovskyi/Ansible.git",
+      file("scripts/update_hosts.sh"),
+      "ansible-playbook ~/Ansible/playbook.yml"
     ]
   }
 
