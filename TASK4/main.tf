@@ -87,6 +87,7 @@ resource "aws_instance" "ansible" {
   provisioner "remote-exec" {
     inline = [
       "sudo mv /home/ubuntu/id_rsa ~/.ssh/id_rsa", #move ssh_key for webserver to .ssh folder
+      "sudo chmod 600 ~/.ssh/id_rsa",
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 10; done", #be sure installing finished 
       "sudo apt update -y",
       "sudo apt install -y ansible", 
@@ -97,7 +98,9 @@ resource "aws_instance" "ansible" {
       file("scripts/get_ec2_ip_by_aws_cli.sh"), #save webserver public ip to .txt file on /home/ubuntu/.txt
       "git clone https://github.com/PavloChaikovskyi/Ansible.git",
       file("scripts/update_hosts.sh"),
-      "ansible-playbook ~/Ansible/playbook.yml"
+      "sleep 10",
+      "echo 'lets go! to play ansible'",
+      "ansible-playbook -i ~/Ansible/ansible.cfg playbook.yml"
     ]
   }
 
@@ -157,4 +160,15 @@ resource "aws_security_group" "allow_ssh_and_http_https" {
     protocol    = "-1" # Allow all outbound traffic
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+###################################################################################################
+### OUTPUTS
+###################################################################################################
+output "webserver_public_ip" {
+  value = aws_instance.web_server.public_ip
+}
+
+output "ansible_public_ip" {
+  value = aws_instance.ansible.public_ip
 }
