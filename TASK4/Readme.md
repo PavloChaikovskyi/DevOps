@@ -14,6 +14,8 @@
   - pull ansible configs to ec2 ansible and run scripts to create WebServer from task 2
 
 2. Create Ansible Docker Image with credentials and add it to DockerHub for have a possibility to use Ansible by Jenkins
+  - check if container running properly locally
+  - send it to dockerhub
 
 #### WHAT WAS DONE
 
@@ -72,4 +74,5 @@ get public ip with aws instance by tag
 
 [Download Docker with Ansible playbook](https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-20-04)
 
-
+передача змінних середовища під час запуску докер контейнера; 
+docker run -e ANSIBLE_HOST=3.74.151.67 -e ANSIBLE_SSH_KEY=~/.ssh/id_rsa.pub -e ANSIBLE_USER=ubuntu my-ansible-image
