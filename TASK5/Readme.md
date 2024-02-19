@@ -28,4 +28,25 @@
 
 #### WHAT WAS DONE
 
+- terraform : 2 x ec2 ( test, deploy )
+
+
 ##### USEFULL MATERIALS
+
+JENKINS: 
+
+Install the latest LTS version:  
+  > brew install jenkins-lts
+Start the Jenkins service:  
+  > brew services start jenkins-lts
+STOP the Jenkins service:  
+  > brew services stop jenkins-lts
+Restart the Jenkins service:  
+  > brew services restart jenkins-lts
+Update the Jenkins version:  
+  > brew upgrade jenkins-lts
+
+Jenkins working link:   
+- http://localhost:8080/
+
+[NGINX Configuration](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)

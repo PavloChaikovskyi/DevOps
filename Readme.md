@@ -16,4 +16,7 @@
 
 ### TASK4:WEEK4 
   - Ansible: run website on connected ec2 server using docker container
-  - Ansible: push docker image with ansible configuration files to dockerhub 
+  - Ansible: push docker image with ansible configuration files to dockerhub
+
+### TASK5:WEEK5
+  - Jenkins: 
