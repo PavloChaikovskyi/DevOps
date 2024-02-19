@@ -25,16 +25,13 @@
 - під час створення дженкінс сервера додати файл output.tf і виводити туди публічний айпі адрес дженкінса і днс 
 - створити пайплайн який буде використ ансібел докер імедж і буде деплоїти новий індекс.html на сервер який я створив в поп тасках 
 
-
 #### WHAT WAS DONE
-
 - terraform : 2 x ec2 ( test, deploy )
-
+- jenkins: deploy custom index.html to nginx /var/www/html instead defauld
 
 ##### USEFULL MATERIALS
 
 JENKINS: 
-
 Install the latest LTS version:  
   > brew install jenkins-lts
 Start the Jenkins service:  
@@ -48,5 +45,11 @@ Update the Jenkins version:
 
 Jenkins working link:   
 - http://localhost:8080/
+
+JENKINS PLUGINS: 
+- Publish over SSH : connect to instances by SSH and make actions
+
+TERRAFORM: 
+> sudo chown -R ubuntu:root /var/www/html  // allow jenkins ubuntu user make changes in /var/www/html folder
 
 [NGINX Configuration](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)
