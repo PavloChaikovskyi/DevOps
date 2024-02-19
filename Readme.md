@@ -15,4 +15,5 @@
   - AWS VPC : Avaliability zones, Gateway, Subnets, Routes, NAT Gateway
 
 ### TASK4:WEEK4 
-  - Ansible
+  - Ansible: run website on connected ec2 server using docker container
+  - Ansible: push docker image with ansible configuration files to dockerhub 
