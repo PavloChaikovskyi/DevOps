@@ -84,7 +84,8 @@ resource "aws_instance" "test" {
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'WAITING for cloud-init...'; sleep 1; done", #be sure ec2 installing finished 
       "sudo apt update -y",
       "sudo apt install nginx -y",
-      file("scripts/test_html.sh"), 
+      file("scripts/test_html.sh"),
+      "sudo chown -R ubuntu:root /var/www/html" #allow jenkins ubuntu user edit folder html 
     ]
   }
 
@@ -109,7 +110,8 @@ resource "aws_instance" "deploy" {
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'WAITING for cloud-init...'; sleep 1; done", #be sure ec2 installing finished 
       "sudo apt update -y",
       "sudo apt install nginx -y",
-      file("scripts/deploy_html.sh") 
+      file("scripts/deploy_html.sh"),
+      "sudo chown -R ubuntu:root /var/www/html" #allow jenkins ubuntu user edit folder html 
     ]
   }
 
