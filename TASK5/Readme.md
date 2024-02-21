@@ -66,5 +66,5 @@ ANSIBLE : installed on local machine
 
 ###### USEFULL LINKS ==========================================================================================================
 
-[How to install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview){:target="_blank"} 
-[How to install java on nodes using ansible](https://brodevops.hashnode.dev/installing-java-and-mysql-db-using-ansible-playbook){:target="_blank"}
+[How to install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)
+[How to install java on nodes using ansible](https://brodevops.hashnode.dev/installing-java-and-mysql-db-using-ansible-playbook)
