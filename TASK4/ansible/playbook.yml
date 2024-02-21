@@ -37,7 +37,7 @@
         state: directory
         mode: '0755'
 
-    - name: Download Dockerfile
+    - name: Download Dockerfile from my git repository
       ansible.builtin.git:
         repo: https://github.com/PavloChaikovskyi/Docker.git
         dest: /home/ubuntu/dockerfile
