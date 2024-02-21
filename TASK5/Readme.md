@@ -30,7 +30,7 @@
 A.
   - terraform : 2 x ec2 ( test, deploy )
   - jenkins: deploy custom index.html to nginx /var/www/html to [test, deploy]  
-B.
+B.  
   - terraform: 2 x nodes
   - ansible : install java on [node1, node2]
 
@@ -40,11 +40,11 @@ B.
 
 JENKINS: installed on local machine : http://localhost:8080/
   
-  > brew install jenkins-lts                // Install the latest LTS version
-  > brew services start jenkins-lts         // Start the Jenkins service
-  > brew services stop jenkins-lts          // STOP the Jenkins service
-  > brew services restart jenkins-lts       // Restart the Jenkins service
-  > brew upgrade jenkins-lts                // Update the Jenkins version
+  > brew install jenkins-lts                // Install the latest LTS version  
+  > brew services start jenkins-lts         // Start the Jenkins service  
+  > brew services stop jenkins-lts          // STOP the Jenkins service  
+  > brew services restart jenkins-lts       // Restart the Jenkins service   
+  > brew upgrade jenkins-lts                // Update the Jenkins version  
 
 
 JENKINS PLUGINS: 
@@ -54,17 +54,17 @@ JENKINS PLUGINS:
 - SSH Agent        : save ssh key and username in credentials  
 - SSH Build Agents : possibility to add agents by ssh
 
-TERRAFORM: 
-> sudo chown -R ubuntu:root /var/www/html  // allow jenkins ubuntu user make changes in /var/www/html folder
+TERRAFORM:  
+> sudo chown -R ubuntu:root /var/www/html  // allow jenkins ubuntu user make changes in /var/www/html folder  
 
-ANSIBLE : installed on local machine
-  > ansible -m ping all                            // ping all hosts 
-  > ansible-playbook playbook.yml --syntax-check   // check syntax of the playbook
-  > ansible-playbook playbook.yml --check          // check errors without real running scripts
-  > ansible-playbook playbook.yml                  // run playbook 
+ANSIBLE : installed on local machine  
+  > ansible -m ping all                            // ping all hosts   
+  > ansible-playbook playbook.yml --syntax-check   // check syntax of the playbook  
+  > ansible-playbook playbook.yml --check          // check errors without real running scripts  
+  > ansible-playbook playbook.yml                  // run playbook  
 
 
 ###### USEFULL LINKS ==========================================================================================================
 
-[How to install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)
+[How to install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)  
 [How to install java on nodes using ansible](https://brodevops.hashnode.dev/installing-java-and-mysql-db-using-ansible-playbook)
