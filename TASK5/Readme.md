@@ -7,10 +7,10 @@
 
 ###### PRACTICE
 1. Jenkins : 
- - web hook beetwen git and jenkins  
- - install and configure server
- - plugins (git i etc.)  (try to avoide plugins)
- - credentials
+ - web hook beetwen git and jenkins  ( залогінитись в гіт хаб )
+ + install and configure server 
+ + plugins (git i etc.)  (try to avoide plugins)
+ + credentials
  - piplines  
  - git configaration with jenkinks
  - jenkins nodes 
@@ -26,6 +26,7 @@
 - створити пайплайн який буде використ ансібел докер імедж і буде деплоїти новий індекс.html на сервер який я створив в поп тасках 
 
 #### WHAT WAS DONE
+- install jenkins on local machine
 - terraform : 2 x ec2 ( test, deploy )
 - jenkins: deploy custom index.html to nginx /var/www/html instead defauld
 
