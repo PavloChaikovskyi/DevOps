@@ -1,0 +1,16 @@
+---
+  - name: installing java on NODES
+    hosts: NODES
+    become: true
+    tasks:
+    - name: installing java on nodes
+      apt: 
+        name: openjdk-11-jdk
+        state: latest
+        update-cache: yes
+    - name: Create jenkins folder for nodes
+      ansible.builtin.file:
+        path: /home/ubuntu/jenkins
+        state: directory
+        mode: '0777'
+        
