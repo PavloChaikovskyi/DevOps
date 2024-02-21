@@ -71,6 +71,21 @@ resource "aws_subnet" "public_subnets" {
 ###################################################################################################
 ### EC2 INSTANCES
 ###################################################################################################
+resource "aws_instance" "web_server" {
+  ami                    = "ami-0faab6bdbac9486fb"
+  instance_type          = "t2.micro"
+  tags                   = { Name = "Webserver" }  
+  key_name               = aws_key_pair.ssh_key.key_name
+  vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
+  subnet_id              = aws_subnet.public_subnets[1].id  # Specify the subnet for each instance
+}
+
+# data : take data - posibility to create file
+# data.aws_instance.web_server.public_ip {
+      # ec2.ip = ip 
+# }
+# send web_server public_ip by variable or output file
+
 resource "aws_instance" "ansible" {
   ami                    = "ami-0faab6bdbac9486fb"
   instance_type          = "t2.micro"
@@ -78,6 +93,8 @@ resource "aws_instance" "ansible" {
   key_name               = aws_key_pair.ansible_ssh_key.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
   subnet_id              = aws_subnet.public_subnets[0].id  # Specify the subnet for each instance
+
+  
 
   provisioner "file" {
     source      = "~/.ssh/id_rsa"
@@ -113,14 +130,7 @@ resource "aws_instance" "ansible" {
   }
 }
 
-resource "aws_instance" "web_server" {
-  ami                    = "ami-0faab6bdbac9486fb"
-  instance_type          = "t2.micro"
-  tags                   = { Name = "Webserver" }  
-  key_name               = aws_key_pair.ssh_key.key_name
-  vpc_security_group_ids = [aws_security_group.allow_ssh_and_http_https.id]
-  subnet_id              = aws_subnet.public_subnets[1].id  # Specify the subnet for each instance
-}
+
 
 ###################################################################################################
 ### KEY-PAIRS
