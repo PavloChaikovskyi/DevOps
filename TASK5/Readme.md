@@ -26,11 +26,11 @@
   - створити пайплайн який буде використ ансібел докер імедж і буде деплоїти новий індекс.html на сервер який я створив в поп тасках 
 
 #### WHAT WAS DONE
-- install jenkins on local machine
-A.\  
+- install jenkins on local machine  
+A.
   - terraform : 2 x ec2 ( test, deploy )
-  - jenkins: deploy custom index.html to nginx /var/www/html to [test, deploy]
-B.\  
+  - jenkins: deploy custom index.html to nginx /var/www/html to [test, deploy]  
+B.
   - terraform: 2 x nodes
   - ansible : install java on [node1, node2]
 
