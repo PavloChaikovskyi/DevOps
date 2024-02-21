@@ -27,10 +27,10 @@
 
 #### WHAT WAS DONE
 - install jenkins on local machine
-A.  
+A.\  
   - terraform : 2 x ec2 ( test, deploy )
   - jenkins: deploy custom index.html to nginx /var/www/html to [test, deploy]
-B.  
+B.\  
   - terraform: 2 x nodes
   - ansible : install java on [node1, node2]
 
