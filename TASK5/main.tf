@@ -14,7 +14,7 @@ provider "aws" {
 resource "aws_instance" "node1" {
   ami                    = "ami-0faab6bdbac9486fb"
   instance_type          = "t2.micro"
-  tags                   = { Name = "TEST" } 
+  tags                   = { Name = "node1" } 
   key_name               = aws_key_pair.ssh_key1.key_name
   vpc_security_group_ids = [aws_security_group.ssh_web.id]
 
@@ -36,7 +36,7 @@ resource "aws_instance" "node1" {
 resource "aws_instance" "node2" {
   ami                    = "ami-0faab6bdbac9486fb"
   instance_type          = "t2.micro"
-  tags                   = { Name = "DEPLOY" }  
+  tags                   = { Name = "node2" }  
   key_name               = aws_key_pair.ssh_key1.key_name
   vpc_security_group_ids = [aws_security_group.ssh_web.id]
 
@@ -44,7 +44,6 @@ resource "aws_instance" "node2" {
     inline = [
       "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'WAITING for cloud-init...'; sleep 1; done", #be sure ec2 installing finished 
       "sudo apt update -y",
-
     ]
   }
 
