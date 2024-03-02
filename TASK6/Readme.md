@@ -1,4 +1,4 @@
-### TASK5 Description
+### TASK6 Description
 
 вик локальний дженкінс , підключаю свій гіт в якому є сайт індекс хтмл. 
 дженкінс підключає новий репо гіта в якому будуть зберігатись скрипти на груві 
@@ -9,7 +9,6 @@
 створюю папку деплоймент і в середині створюю джоб в якій викорст дженкінс файли із репозиторія 
 за пайплайна для деплою. 
 всі плейбуки додаю до гіта, 
-
 
 jenkins ->  git -> ansible node : downl git with ansible playbook and jenkins piplienes ( groovy ) -> як додаю змінну серовища [dev, test]  connect to webserver and make deploy with ansible
 
@@ -23,7 +22,7 @@ jenkins ->  git -> ansible node : downl git with ansible playbook and jenkins pi
 
 
 - 7task wordpress website with index.html with database
-- linkedin add skill and active 
++ linkedin add skill and active 
 
 
 ###### THEORY
