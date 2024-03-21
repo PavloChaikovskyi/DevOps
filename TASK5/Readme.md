@@ -1,10 +1,10 @@
 ### TASK5 : JENKINS
 
-  ###### THEORY TASK
+  ###### THEORY TASK ==========================================================================================================
   1. JENKINS ( jobs, nodes, credentials, plugins, hooks, piplines, groovy scripts, cli )
   2. GITHUB ACTIONS 
 
-  ###### PRACTICE TASK
+  ###### PRACTICE TASK ==========================================================================================================
   1. Jenkins : 
     + web hook beetwen git and jenkins
     + install and configure server 
@@ -17,6 +17,13 @@
   2. GitHub actions : 
     - створити репо в якому зберігаються всі файли для імеджа ( мій сайт )
     - зробити пайплайн який буде збирати репо з докер файлом імеджом і по коміту перебудовувати і грузити на докерхаб
+      + репозиторій в якому є dockerfile
+      + заінсталити docker на моєму портфоліо сайті
+      - пайплайн в гітхаб екшинс:  
+        - по коміту з тих файлів будується докерімедж;
+        - грузиться на докерхаб
+        - як загрузиться - звідти на сервер; 
+        - запускається докер контейнер d
 
   3. Jenkins
   + server by terraform with Jenkins INSIDE DOCKER with hostname public ip : шоб я зміг зайти на дженкінс на сайт через браузер.
@@ -56,7 +63,7 @@ JAVA Version on my Mac machine : I needed to replace path to openJDK
 > export CPPFLAGS="-I/usr/local/opt/openjdk/include"
 > source ~/.zshrc 
 
-#### USEFULL MATERIALS
+#### USEFULL MATERIALS ===================================================================================
 JENKINS: installed on local machine : http://localhost:8080/
 > brew install jenkins-lts                // Install the latest LTS version  
 > brew services start jenkins-lts         // Start the Jenkins service  
@@ -92,6 +99,9 @@ JENKINS CLI :
 // best practices is to replace name and passw with environment variables :   
 > export JENKINS_USER_ID=
 > export JENKINS_API_TOKEN=
+
+GITHUB ACTIONS : 
+.github/workflows/pipline.yml
 
 ###### USEFULL LINKS ==========================================================================================================
 [How to install nginx](https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview)

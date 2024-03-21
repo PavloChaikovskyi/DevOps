@@ -19,4 +19,5 @@
   - Ansible: push docker image with ansible configuration files to dockerhub
 
 ### TASK5:WEEK5
-  - Jenkins: 
+  - Jenkins: nodes, github webhook, groovy scripts, creating pipelines
+  - GitHub Actions 
